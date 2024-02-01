@@ -1,0 +1,39 @@
+{% include "Ahead.html"%}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 mt-4">
+        <div class="card p-3 bg-secondary">
+            <h2 class="text-center text-white"> Add Airplane Details</h2>
+            <form action="AddAirplane1" method="post">
+                <div class="form-group ">
+                    <label for="company_name" class="text-white">Company Name</label>
+                    <input type="text" id="company_name"  name="company_name" class="form-control" placeholder="Enter Name" required>
+                </div>
+                <div class="form-group ">
+                    <label for="airplane_id" class="text-white">Airplane Id</label>
+                    <input type="text" id="airplane_id"  name="airplane_id" class="form-control" placeholder="Enter Name" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="no_of_seats_in_first_class" class="text-white">First Class</label>
+                    <input type="number" id="no_of_seats_in_first_class" name="no_of_seats_in_first_class" class="form-control mt-1" placeholder="Enter no_of_seats" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="no_of_seats_in_business_class" class="text-white">Business Class</label>
+                    <input type="number" id="no_of_seats_in_business_class" name="no_of_seats_in_business_class" class="form-control mt-1" placeholder="Enter no_of_seats" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="no_of_seats_in_economy_class" class="text-white">Economy Class</label>
+                    <input type="number" id="no_of_seats_in_economy_class" name="no_of_seats_in_economy_class" class="form-control mt-1" placeholder="Enter no_of_seats" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="airplane_description" class="text-white">Description</label>
+                    <input type="text" id="airplane_description" name="airplane_description" class="form-control mt-1" placeholder="Enter description" required>
+                </div>
+
+                <div>
+                    <input type="submit" value="AddAirplane" class="btn btn-primary w-100 mt-2">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

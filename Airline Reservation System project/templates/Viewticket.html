@@ -1,0 +1,58 @@
+{% if session['role']== 'customer' %}
+{% include "Uhead.html" %}
+{% elif session['role']== 'admin' %}
+{% include "Ahead.html" %}
+{%endif%}
+<br>
+<div class="container mt-3"  style="height:80vh;overflow:auto">
+    <div class="row">
+        {% for ticket in tickets :%}
+            {% set flight_schedule=getflight_schedulebybooking2(ticket['booking_id']) %}
+            {% set fromAirport=getAirportbyAirportid(flight_schedule['From_airport_id'])%}
+            {% set ToAirport=getAirportbyAirportid2(flight_schedule['to_airport_id'])%}
+           <div class="col-md-10 mt-3">
+               <div class="card p-3" >
+                   <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-secondary">BookingId </div>
+                            <div class="h6" style="font-size:15px">{{ticket['booking_id']}}</div>
+                            <div class="text-secondary">Airplane Id</div>
+                            <div class="h6" style="font-size:15px">{{ticket['airplane_name']}}</div>
+                            <div class="text-secondary mt-1">SeatNumber </div>
+                            <div class="h6" style="font-size:15px">{{ticket['seat_number']}}</div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="text-secondary">Date </div>
+                            <div class="h6" style="font-size:15px">{{ticket['date']}}</div>
+                             <div class="text-secondary mt-1">Status </div>
+                            <div class="h6" style="font-size:15px">{{ticket['status']}}</div>
+                        </div>
+
+                       <div class="col-md-3">
+                            <div class="text-secondary">From Airport </div>
+                            <div class="h6" style="font-size:15px">{{fromAirport['airport_name']}}</div>
+                            <div class="text-secondary mt-1">Passenger Name </div>
+                            <div class="h6" style="font-size:15px">{{ticket['passenger_name']}}</div>
+                            <div class="text-secondary mt-1">Passenger Age </div>
+                            {% if int(ticket['passenger_age']) >= int(18) %}
+                            <div class="h6" style="font-size:15px">{{ticket['passenger_age']}} Years (Adult)</div>
+                            {% elif int(ticket['passenger_age']) < int(18) %}
+                            <div class="h6" style="font-size:15px">{{ticket['passenger_age']}} Years (Children)</div>
+                            {%endif%}
+                       </div>
+
+                        <div class="col-md-3">
+                            <div class="text-secondary">To Airport </div>
+                            <div class="h6" style="font-size:15px">{{ToAirport['airport_name']}}</div>
+                            <div class="text-secondary mt-1">DepartureTime </div>
+                            <div class="h6" style="font-size:15px">{{ticket['Departure_time']}}</div>
+                            <div class="text-secondary mt-1">ArrivedTime </div>
+                            <div class="h6" style="font-size:15px">{{ticket['Arrived_time']}}</div>
+                        </div>
+                   </div>
+               </div>
+           </div>
+        {% endfor%}
+    </div>
+</div>

@@ -1,0 +1,80 @@
+{% include "Uhead.html" %}
+<div class="container mt-3">
+    <div class="card p-3 ">
+     <form action="Book_Ticket" method="post">
+        <div class="row">
+            {% set fromAirport=getAirportbyAirportid(flight_schedule['From_airport_id'])%}
+            {% set ToAirport=getAirportbyAirportid2(flight_schedule['to_airport_id'])%}
+                <div class="col-md-3">
+                    <div class="h5 text-dark text-center">{{fromAirport['airport_name']}}</div>
+                    <div class="h6 text-primary text-center">({{flight_schedule['journey_of_departure_time']}})</div>
+                    <div class="text-warning text-center">To</div>
+                    <div class="h5 text-dark text-center">{{ToAirport['airport_name']}}</div>
+                    <div class="h6 text-primary text-center">({{flight_schedule['journey_of_arrived_time']}})</div>
+                    <div class="text-dark h6 text-center">First Class:</div>
+                    <div class=" h5 text-secondary text-center">${{flight_schedule['price_of_seats_in_first_class']}}</div>
+                    <div class="h6 text-dark mt-2 text-center">Business Class:</div>
+                    <div class="h5 text-secondary text-center">${{flight_schedule['price_of_seats_in_business_class']}}</div>
+                    <div class="h6 text-dark mt-2 text-center">Economy Class</div>
+                    <div class="h5 text-secondary text-center">${{flight_schedule['price_of_seats_in_economy_class']}}</div>
+                </div>
+               <div class="col-md-6">
+                   <h5 class=" text-success">First class</h5>
+                   <div class="row">
+                       {% for i in range(1,int(Airplane['no_of_seats_in_first_class'])+1)%}
+                       {% set is_booked=is_seat_booked(flight_schedule["_id"],"first_class_booked",i)%}
+                       {% if is_booked: %}
+                           <div class="col-md-2 mt-1">
+                               <label for="F_seat_number{{i}}">F{{i}}</label>
+                           </div>
+                       {% else %}
+                           <div class="col-md-2 mt-1">
+                                <input type="checkbox" name="F_seat_number{{i}}" id="F_seat_number{{i}}">
+                                <label for="F_seat_number{{i}}">F{{i}}</label>
+                           </div>
+                       {% endif %}
+                       {%endfor%}
+                        <div><h5 class="mt-2 text-success ">Business class</h5></div>
+                        {% for i in range(1,int(Airplane['no_of_seats_in_business_class'])+1)%}
+                        {% set is_booked=is_seat_booked(flight_schedule["_id"],"business_class_booked",i)%}
+                        {% if is_booked: %}
+                        <div class="col-md-2 mt-3">
+                            <label for="B_seat_number{{i}}">B{{i}}</label>
+                        </div>
+                       {% else %}
+                       <div class="col-md-2 mt-3">
+                            <input type="checkbox" name="B_seat_number{{i}}" id="B_seat_number{{i}}">
+                            <label for="B_seat_number{{i}}">B{{i}}</label>
+                        </div>
+                        {% endif %}
+                        {%endfor%}
+                        <div><h5 class="mt-2 text-success">Economy class</h5></div>
+                        {% for i in range(1,int(Airplane['no_of_seats_in_economy_class'])+1)%}
+                        {% set is_booked=is_seat_booked(flight_schedule["_id"],"economy_class_booked",i)%}
+                         {% if is_booked: %}
+                        <div class="col-md-2 mt-3">
+                            <label for="E_seat_number{{i}}">E{{i}}</label>
+                        </div>
+                       {% else %}
+                        <div class="col-md-2 mt-3">
+                            <input type="checkbox" name="E_seat_number{{i}}" id="E_seat_number{{i}}">
+                            <label for="E_seat_number{{i}}">E{{i}}</label>
+                        </div>
+                        {% endif %}
+                        {%endfor%}
+                   </div>
+               </div>
+                <div class="col-md-3">
+                    <div class="text-success h4">Journey Date</div>
+                    <div class="h4 text-dark">{{flight_schedule['date']}}</div>
+                    <input type="hidden" name="flight_schedule_id" value="{{flight_schedule['_id']}}">
+                    <input type="submit"  class="btn btn-primary  w-50 mt-2">
+
+                </div>
+
+
+        </div>
+     </form>
+  </div>
+</div>
+

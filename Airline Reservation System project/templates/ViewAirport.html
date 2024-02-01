@@ -1,0 +1,66 @@
+{% include "Ahead.html" %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card p-3 bg-secondary">
+            <h2 class="text-center text-white"> Add Airport Details</h2>
+            <form action="AddAirport1" method="post">
+                <div class="form-group ">
+                    <label for="airport_name" class="text-white">Airport Name</label>
+                    <input type="text" id="airport_name"  name="airport_name" class="form-control" placeholder="Enter Name" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="perameter" class="text-white">Perameter</label>
+                    <input type="text" id="perameter" name="perameter" class="form-control mt-1" placeholder="Enter perameter" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="no_of_air_strips" class="text-white">Number of Air Strips</label>
+                    <input type="number" id="no_of_air_strips" name="no_of_air_strips" class="form-control mt-1" placeholder="Enter number" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="airport_description" class="text-white">Description</label>
+                    <input type="text" id="airport_description" name="airport_description" class="form-control mt-1" placeholder="Enter description" required>
+                </div>
+                <div class="form-group mt-2">
+                <label for="address" class="text-white">Address</label>
+                <textarea  id="address" name="address" class="form-control mt-1" placeholder="Enter address" required></textarea>
+              </div>
+                <div>
+                    <input type="submit" value="AddAirport" class="btn btn-primary w-100 mt-2">
+                </div>
+            </form>
+        </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+            {%for Airport in Airports:%}
+                <div class="col-md-6">
+                    <div class="card p-3 mt-2  text-dark" >
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="text-center" style="font-size:20px">{{Airport['airport_name']}}</h3>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <b>Parameter</b>
+                                <div>{{Airport['perameter']}}</div>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <b>Airstrips</b>
+                                <div>{{Airport['no_of_air_strips']}}</div>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <b>Address</b>
+                                <div>{{Airport['address']}}</div>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <b>Description</b>
+                                <div>{{Airport['airport_description']}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>

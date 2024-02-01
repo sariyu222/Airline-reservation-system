@@ -1,0 +1,43 @@
+{% include "Mhead.html"%}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 mt-4">
+        <div class="card p-3 bg-secondary">
+            <h2 class="text-center text-white">Customer Registration</h2>
+            <form action="customer_Reg1" method="post">
+                <div class="form-group ">
+                    <label for="Customer_name" class="text-white">Customer Name</label>
+                    <input type="text" id="Customer_name"  name="Customer_name" class="form-control" placeholder="Enter Name" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="email" class="text-white">Email</label>
+                    <input type="email" id="email" name="email" class="form-control mt-1" placeholder="Enter email" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="phone" class="text-white">Phone</label>
+                    <input type="number" id="phone" name="phone" class="form-control mt-1" placeholder="Enter phone" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="password" class="text-white">Password</label>
+                    <input type="password" id="password" name="password" class="form-control mt-1" placeholder="Enter password" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="age" class="text-white">Age</label>
+                    <input type="number" id="age" name="age" class="form-control mt-1" placeholder="Enter your age" required>
+                </div>
+                <div>
+                    <label class="text-white mt-1">Gender</label>
+                    <input type="radio"  name="gender" value="male" id="male"><label class="text-white" for="male">Male</label>
+                    <input type="radio"  name="gender" value="female" id="female"> <label  class="text-white" for="female">Female</label>
+                </div>
+               <div class="form-group mt-2">
+                <label for="address" class="text-white">Address</label>
+                <textarea  id="address" name="address" class="form-control mt-1" placeholder="Enter address" required></textarea>
+               </div>
+                <div>
+                    <input type="submit" value="Register" class="btn btn-primary w-100 mt-2">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

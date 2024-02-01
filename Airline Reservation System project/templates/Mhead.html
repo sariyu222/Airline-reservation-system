@@ -1,0 +1,60 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<body class="vh-100 overflow-hidden">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+        <div class="container mt-5">
+            <!--Logo-->
+             <a class="navbar-brand fs-3" href="#hello"><h1 style="color: rgb(255, 255, 255); font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size:26px" >Airline Reservation</h1></a>
+            <!--Toggle Btn-->
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+             <span class="navbar-toggler-icon"></span>
+             </button>
+             <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <!--Sidebar header -->
+                 <div class="offcanvas-header text-white border-bottom">
+                     <h4 class="offcanvas-title" id="offcanvasNavbarLabel">Airline Reservation</h4>
+                     <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                 </div>
+                 <!-- Sidebar body -->
+                <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+                    <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                         <li class="nav-item">
+                             <a class="nav-link active px-3 py-1 rounded-4" style ="font-size: 1.4em; font-weight: 600;" aria-current="page" href="/">Home</a>
+                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link active mx-5 px-3 py-1 rounded-4" style ="font-size: 1.4em; font-weight: 600;" href="/admin_login">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active mx-2 px-3 py-1 rounded-4" style ="font-size: 1.4em; font-weight: 600;" href="/customer_login">Customer</a>
+                        </li>
+                    </ul>
+                    <!--Login & Singup-->
+                    <div class="d-flex flex-lg-row flex-column justify-content-center align-items-center gap-3">
+                        <a href="/customer_Reg" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f94ca4; font-size: 1.3em;">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+<style>
+body{
+    background: url(https://cdn.pixabay.com/photo/2021/07/31/12/26/plane-6511877_1280.jpg);
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+    }
+
+@media(max-width: 991px){
+  .sidebar{
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  }
+}
+
+.nav-item:hover{
+    background-color: #5c0867;
+     border-radius: 30px;
+}
+</style>

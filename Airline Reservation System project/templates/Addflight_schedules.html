@@ -1,0 +1,102 @@
+{% include "Ahead.html" %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    function verify(){
+     let From_airport_id = $("#From_airport_id").val();
+      let to_airport_id = $("#to_airport_id").val();
+      if (From_airport_id == to_airport_id){
+      alert("FromAirport ToAirport Should Not Be Same");
+      $($to_airport_id).val("");
+      }
+
+    }
+     $(document).ready(function(){
+        let dtToday = new Date();
+        let month = dtToday.getMonth() + 1;
+        let day = dtToday.getDate();
+        let year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        var today = year + '-' + month + '-' + day;
+        $("#date").attr("min",today)
+    });
+    $(document).ready(function(){
+        var today = new Date().toISOString().slice(0, 16);
+        $("#journey_of_departure_time").attr("min",today)
+    });
+    $(document).ready(function(){
+        var today = new Date().toISOString().slice(0, 16);
+        $("#journey_of_arrived_time").attr("min",today)
+    });
+</script>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card p-3">
+                <h2 class="text-center text-primary"> Add Flight Schedules</h2>
+                <form action="Addflight_schedules1" method="post">
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <label for="Airplane_id" class="text-color h5"> Airplane Id</label>
+                        <select id="Airplane_id" name="Airplane_id" class="form-control" required>
+                            <option value="">Choose Airplane</option>
+                            {% for Airplane in Airplanes: %}
+                            <option value="{{Airplane['_id']}}">{{Airplane['airplane_name']}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="date" class="text-color h5">Date</label>
+                        <input type="date" name="date" id="date" placeholder="Enter date"  class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="From_airport_id" class="text-color h5">From Airport</label>
+                        <select id="From_airport_id" name="From_airport_id" onchange="verify()" class="form-control" required>
+                            <option value="">Choose Airports</option>
+                            {% for Airport in Airports: %}
+                            <option value="{{Airport['_id']}}">{{Airport['airport_name']}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                     <div class="col-md-6 mt-2">
+                        <label for="to_airport_id" class="text-color h5">To Airport</label>
+                        <select id="to_airport_id" name="to_airport_id" onchange="verify()" class="form-control" required>
+                            <option value="">Choose Airports</option>
+                            {% for Airport in Airports: %}
+                            <option value="{{Airport['_id']}}">{{Airport['airport_name']}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="journey_of_departure_time" class="text-color h5">Departure Time</label>
+                        <input type="datetime-local" name="journey_of_departure_time" id="journey_of_departure_time" required class="form-control">
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="journey_of_arrived_time" class="text-color h5">Arrived Time</label>
+                        <input type="datetime-local" name="journey_of_arrived_time" id="journey_of_arrived_time"  required class="form-control">
+                    </div>
+                     <div class="col-md-6 mt-2">
+                        <label  for="price_of_seats_in_first_class" class="form-label text-color h5"> First Class Price</label>
+                        <input type="number" name="price_of_seats_in_first_class" id="price_of_seats_in_first_class" placeholder="Enter price" required class="form-control">
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label  for="price_of_seats_in_business_class" class="form-label text-color h5"> Business Class Price</label>
+                        <input type="number" name="price_of_seats_in_business_class" id="price_of_seats_in_business_class" placeholder="Enter price" required class="form-control">
+                    </div>
+                     <div class="col-md-6 mt-2">
+                        <label  for="price_of_seats_in_economy_class" class="form-label text-color h5"> Economy Class Price</label>
+                        <input type="number" name="price_of_seats_in_economy_class" id="price_of_seats_in_economy_class" placeholder="Enter price"  required class="form-control">
+                    </div>
+                    <div>
+                    <input type="submit" value="AddFlightSchedules" class="btn btn-primary w-100 mt-2">
+                 </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

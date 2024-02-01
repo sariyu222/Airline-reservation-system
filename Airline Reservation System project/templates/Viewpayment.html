@@ -1,0 +1,33 @@
+{% if session['role'] == 'customer' %}
+    {% include "Uhead.html" %}
+{%endif%}
+
+{% if session['role']== 'admin' %}
+    {% include "Ahead.html" %}
+{%endif%}
+<div class="container mt-2">
+    <div class="row">
+         <div class="card p-3">
+             <div class="col-md-12">
+                <table class="table table-bordered">
+                 <tr>
+                     <th style="color:#00008B">BookingId</th>
+                     <th style="color:#00008B">CardNumber</th>
+                     <th style="color:#00008B">CardName </th>
+                     <th style="color:#00008B">ExpiryDate</th>
+                     <th style="color:#00008B">CardCvv</th>
+                     <th style="color:#00008B">TotalAmount</th>
+                 </tr>
+                 <tr>
+                     <td>{{payment['booking_id']}}</td>
+                     <td>{{payment['card_number']}}</td>
+                     <td>{{payment['card_name']}}</td>
+                     <td>{{payment['expiry_date']}}</td>
+                     <td>{{payment['card_cvv']}}</td>
+                     <td>{{payment['Total_amount']}}</td>
+                 </tr>
+             </table>
+            </div>
+        </div>
+    </div>
+</div>

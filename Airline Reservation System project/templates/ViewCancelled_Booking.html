@@ -1,0 +1,140 @@
+{% include "Ahead.html" %}
+<h3 class="text-center  mt-4 h4" style="color:#FFFAF0">View Booking Details</h3>
+<div class="container mt-3">
+    <div class="card p-3  mt-1">
+        <div class="row">
+            {% for booking in bookings :%}
+            {% set customer=customernamebycustomerId(booking['customer_id']) %}
+            {% set flight_schedule=getflight_schedulebybooking(booking['flight_schedule_id']) %}
+            {% set fromAirport=getAirportbyAirportid(flight_schedule['From_airport_id'])%}
+            {% set ToAirport=getAirportbyAirportid2(flight_schedule['to_airport_id'])%}
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <div class="h6 text-dark" style="font-size:17px">{{fromAirport['airport_name']}}</div>
+                        <div class="h6" style="color:#00008B;font-size:15px">({{flight_schedule['journey_of_departure_time']}})</div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="h5" style="color:#00008B">==></div>
+                    </div>
+                    <div class=" col-md-5 ">
+                        <div class="h6 text-dark" style="font-size:17px">{{ToAirport['airport_name']}}</div>
+                        <div class="h6" style="color:#00008B;font-size:15px">({{flight_schedule['journey_of_arrived_time']}})</div>
+                    </div>
+                 </div>
+            </div>
+                <div class="col-md-2 ">
+                    {% set ticket=getTicketbybooking(booking['_id']) %}
+                    <div class="h6 text-danger" style="color:#00008B;font-size:16px">Status: {{booking['status']}}</div>
+                </div>
+                 <div class="col-md-3">
+                {%set Airplane=getAirplanebyAirplanrid(flight_schedule['Airplane_id'])%}
+                        <div class="h6" style="color:#00008B;font-size:18px">Airplane : {{Airplane['airplane_name']}}</div>
+                     <div class="h6" style="color:#00008B;font-size:15px">Total Amount : $ {{booking['Total_amount']}}</div>
+                 </div>
+                 <div class="col-md-3">
+                     <div class="" style="font-size:18px"><b>Customer : {{customer['Customer_name']}} ({{customer['phone']}})</b></div>
+                 </div>
+                {% if len(booking['first_class_booked'])%}
+                 <div class="col-md-6">
+                    <div class="card p-2">
+                        <div class="">First Class :</div>
+                        <div class="row">
+                            {% for first_class_selected_seat in booking['first_class_booked']%}
+                            {% set ticket = get_first_class_pass_details(booking['_id'],first_class_selected_seat)%}
+                            <div class="col-md-6 card p-1 mt-1" style="color:#000000">
+                                <div class="row">
+                                 <div class="text-center">F{{first_class_selected_seat}}</div>
+                                    <div class="col-md-6" >
+                                        <div class="text-secondary">Passenger Name</div>
+                                         <div class="h6" style="font-size:15px">{{ticket['passenger_name']}}
+                                            {% if int(ticket['passenger_age']) >= int(18) %}
+                                             (Adult)
+                                             {% elif int(ticket['passenger_age']) < int(18) %}
+                                             (Children)
+                                             {% endif%}
+                                         </div>
+                                         </div>
+                                     <div class="col-md-3" style="font-size:15px">
+                                         <div class="text-secondary">Age</div>
+                                         <div class="h6" style="font-size:15px">{{ticket['passenger_age']}} Years</div>
+                                     </div>
+                                </div>
+                               </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                 </div>
+                {%endif%}
+                {% if len(booking['economy_class_booked'])%}
+                 <div class="col-md-6 ">
+                    <div class="card p-2">
+                        <div class="">Economy Class :</div>
+                        <div class="row">
+                             {% for economy_class_selected_seat in booking['economy_class_booked']%}
+                            {% set ticket2 = get_economy_class_pass_details(booking['_id'],economy_class_selected_seat)%}
+                            <div class="col-md-6 card p-1 mt-1" style="color:#000000">
+                                <div class="row">
+                                 <div class="text-center">E{{economy_class_selected_seat}}</div>
+                                    <div class="col-md-6" >
+                                        <div class="text-secondary">Passenger Name</div>
+                                         <div class="h6" style="font-size:15px">{{ticket2['passenger_name']}}
+                                            {% if int(ticket2['passenger_age']) >= int(18) %}
+                                             (Adult)
+                                             {% elif int(ticket2['passenger_age']) < int(18) %}
+                                             (Children)
+                                             {% endif%}
+                                         </div>
+                                         </div>
+                                     <div class="col-md-3" style="font-size:15px">
+                                         <div class="text-secondary">Age</div>
+                                         <div class="h6" style="font-size:15px">{{ticket2['passenger_age']}} Years</div>
+                                     </div>
+                                </div>
+                               </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                 </div>
+                {%endif%}
+
+             {% if len(booking['business_class_booked'])%}
+             <div class="col-md-6 mt-1">
+                 <div class="card p-2">
+                     <div class="">Business Class :</div>
+                     <div class="row">
+                            {% for business_class_selected_seat in booking['business_class_booked']%}
+                            {% set ticket3 = get_business_class_pass_details(booking['_id'],business_class_selected_seat)%}
+                            <div class="col-md-6 card p-1 mt-1" style="color:#000000">
+                                <div class="row">
+                                 <div class="text-center">B{{business_class_selected_seat}}</div>
+                                    <div class="col-md-6" >
+                                        <div class="text-secondary">Passenger Name</div>
+                                         <div class="h6" style="font-size:15px">{{ticket3['passenger_name']}}
+                                            {% if int(ticket3['passenger_age']) >= int(18) %}
+                                             (Adult)
+                                             {% elif int(ticket3['passenger_age']) < int(18) %}
+                                             (Children)
+                                             {% endif%}
+                                         </div>
+                                         </div>
+                                     <div class="col-md-3" style="font-size:15px">
+                                         <div class="text-secondary">Age</div>
+                                         <div class="h6" style="font-size:15px">{{ticket3['passenger_age']}} Years</div>
+                                     </div>
+                                </div>
+                               </div>
+                            {%endfor%}
+                        </div>
+                 </div>
+             </div>
+            {%endif%}
+            <div class="row">
+                <div class="col-md-4"><a href="Viewpayment?booking_id={{booking['_id']}}" class="btn btn-primary w-100 mt-2">ViewPayment</a></div>
+                <div class="col-md-4"><a href="Viewticket?booking_id={{booking['_id']}}"  class="btn btn-success w-100 mt-2">ViewTicket</a></div>
+            </div>
+            <hr class="mt-4">
+            {%endfor%}
+        </div>
+    </div>
+</div>

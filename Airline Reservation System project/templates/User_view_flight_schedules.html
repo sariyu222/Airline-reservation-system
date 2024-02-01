@@ -1,0 +1,52 @@
+{% include "Uhead.html" %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        let dtToday = new Date();
+        let month = dtToday.getMonth() + 1;
+        let day = dtToday.getDate();
+        let year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        var today = year + '-' + month + '-' + day;
+        $("#date").attr("min",today)
+    });
+</script>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                     <form action="User_view_flight_schedules1" method="get">
+                         <div class="mt-1">
+                             <label for="fromAirport">From Airport:</label>
+                             <input list="fromAirports" name="from_airport_name" id="fromAirport" class="form-control">
+                             <datalist id="fromAirports">
+                                 {%for Airport in fromAirports: %}
+                                  <option value="{{Airport['airport_name']}}">
+                                      {%endfor%}
+                             </datalist>
+                         </div>
+                         <div class="mt-2">
+                            <label for="ToAirport">To Airport:</label>
+                            <input list="ToAirports" name="To_airport_name" id="ToAirport" class="form-control">
+                                <datalist id="ToAirports">
+                                    {%for Airport in ToAirports: %}
+                                    <option value="{{Airport['airport_name']}}">
+                                    {%endfor%}
+                                </datalist>
+                        </div>
+                        <div class="mt-2">
+                            <label for="date">Date</label>
+                            <input type="date" name="date" id="date" placeholder="Enter date" class="form-control" required>
+                        </div>
+                    <div>
+                        <input type="submit" value="Search" class="btn btn-success w-100 mt-2">
+                    </div>
+                </form>
+              </div>
+        </div>
+    </div>
+</div>
